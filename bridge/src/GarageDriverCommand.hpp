@@ -5,7 +5,7 @@
 /**
  *@desc Garage controller commands.
  */
-enum GarageDriverProtocol {
+enum GarageDriverCommand{
 	NoOperation,
 	OpenToNextStrip,
 	FullOpen,

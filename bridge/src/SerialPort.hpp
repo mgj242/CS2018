@@ -25,15 +25,15 @@ public:
 
     // Interface
 
-    bool readLine(string& text);
-    bool writeLine(string text);
+    bool readLine(std::string& text);
+    bool writeLine(std::string text);
 
 
 private:
     // Attributes
 
     int _fd;
-}
+};
 
 
 #endif // !defined SERIAPORT_HPP
