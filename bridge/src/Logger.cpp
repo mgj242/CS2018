@@ -49,23 +49,23 @@ int main(void){
 
 LogLevel x = Debug;
 Logger* logger = getInstance();
-logger->logDebug("test");
-/*
+/*logger->logDebug("test");*/
+
     if (x == Debug) {
-    logger.logDebug("test");
+    logger->logDebug("test");
     }
     else if (x == Info) {
-        logInfo("test2");
+        logger->logInfo("test2");
     }
     else if (x == Warning) {
-    logWarning("test3");
+    logger->logWarning("test3");
     }
     else if (x == Error) {
-    logError("test4");
+    logger->logError("test4");
     }
     else {
         return 0;
     }
-*/
+
 
 }
