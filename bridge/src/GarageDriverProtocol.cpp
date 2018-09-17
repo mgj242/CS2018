@@ -1,6 +1,7 @@
+#include <iostream>
 #include <string>
 #include <sstream>
-#include <iostream>
+
 #include "GarageDriverProtocol.hpp"
 
 
@@ -15,14 +16,19 @@ bool GarageDriverProtocol::recieveState(GarageState& state) {
     std::string line;
     std::string token;
 
+/*
     if (!_port.readLine(line))
         return false;
+*/
+    // string for testing 
+    line = "abc, def,   ghi";
 
     // parse the line and set GarageStateParameters
     std::istringstream stream(line);
     size_t pos=-1;
+    
 
-    while(stream>>token){
+    while (stream>>token){
         while ((pos=token.rfind(' ')) != std::string::npos) {
                   std::cout << token << '\n';
         }

@@ -1,4 +1,4 @@
-.PHONY: all clean
+-.PHONY: all clean
 
 
 CC=g++
@@ -11,7 +11,7 @@ all: bin/bridge
 
 
 clean:
-	rm -f obj/*. bin/*. 
+	rm -f obj/* bin/* 
 
 
 bin/bridge: obj/Config.o \
