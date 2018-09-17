@@ -13,9 +13,13 @@ clean:
 	rm -f obj/*. bin/*. 
 
 
-bin/bridge: obj/Config.o
+bin/bridge: obj/Config.o obj/GarageState.o
 	$(CC) -o $@ $+ 
 
 
 obj/Config.o: src/Config.cpp src/Config.hpp
+	$(CC) $(CC_OPTIONS) $< -o $@
+
+
+obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp
 	$(CC) $(CC_OPTIONS) $< -o $@
