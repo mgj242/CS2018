@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+  
+<center>
+<h2>Smart Home Postman Controller</h2>
+  <img src="fptLogo.png" />
+
+<p>Authorization for opening garage gate</p>
+  
+<form action="/action_page.php">
+  <fieldset>
+   <legend>Personal information:</legend>
+	<br />
+    <b>ID:
+	</b>
+	<br />
+    <input name="firstname" type="text" value="YourID" /> 
+    <br />
+	<br />
+    <b>Password:</b>
+	<br /> 
+    <input name="password" type="password" value="password" />
+    <br />
+	<br />
+	<br />
+    <input id = "openGate" onClick="closing()" type="submit" value="Open gate" />
+    <input type="submit" value="Close gate" />
+  </fieldset>
+  </form>
+  
+</center>
+  
+  <script>
+  function closing() {
+		document.getElementById("openGate").value = "Close GATE" 
+  }
+  </script>
+  
+  
+  
+</body>
+</html> 
