@@ -45,7 +45,7 @@ public:
     // Interface
 
     bool readLine(std::string& text);
-    bool writeLine(std::string& text);
+    bool writeLine(const std::string& text);
     void pump();
 
 

@@ -163,7 +163,7 @@ bool SerialPort::readLine(std::string& text)
 }
 
 
-bool SerialPort::writeLine(std::string& line)
+bool SerialPort::writeLine(const std::string& line)
 {
     // check whether there is enough space for the line in the _outputBuffer
     const uint16_t spaceAvailable = c_bufferSize - _outputIx; 

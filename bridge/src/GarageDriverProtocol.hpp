@@ -26,6 +26,13 @@ public:
 
     void sendCommand(GarageDriverCommand command);
 
+    /**
+     * @desc if you have somethink to report (acknowledge ID) write into serial port
+     *  otherwise do nothing
+     */
+    void pump();
+    
+    
 private:
     // Implementation
 
@@ -36,8 +43,11 @@ private:
 
     // Attributes
 
+    bool _waitingForAcknowledge;
+    uint32_t _ackId;
     SerialPort* _port;
 };
 
 
 #endif // !defined GARAGEDRIVERPROTOCOL_HPP
+
