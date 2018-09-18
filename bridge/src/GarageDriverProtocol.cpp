@@ -5,7 +5,7 @@
 #include "GarageDriverProtocol.hpp"
 
 
-void GarageDriverProtocol::initialize(SerialPort port) {
+void GarageDriverProtocol::initialize(SerialPort* port) {
     // Save port to use later
     _port = port;
 }

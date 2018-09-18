@@ -12,14 +12,29 @@
 #include "SerialPort.hpp"
 
 
+// Construction & destruction
+
+
+SerialPort::SerialPort() :
+    _fd(-1)
+,   _currentIx(0)
+{
+}
+
+
 void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
     uint8_t bitsCount, SerialPortStopBits stopBits, SerialPortParity parity) {
+
+    if (_fd >= 0) {
+        LOG_ERROR("Unable to initialize port %s - already initialized", devicePath);
+        throw new SerialPortError();
+    }
 
     // open the port
 
     _fd = open(devicePath, O_RDWR | O_NOCTTY | O_NDELAY);
     if (_fd == -1) {
-        LOG_ERROR("Unable to oprm derial port %s: %s", devicePath, strerror(errno));
+        LOG_ERROR("Unable to open serial port %s: %s", devicePath, strerror(errno));
         throw new SerialPortError();
     }
 
@@ -98,6 +113,10 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
             devicePath, strerror(errno));
         throw new SerialPortError();
     }
+
+
+    _currentIx = 0;
+
     LOG_DEBUG("Successfully configured serial port %s", devicePath);
 }
 
@@ -107,6 +126,37 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
 
 bool SerialPort::readLine(std::string& text)
 {
+    uint8_t* currentPos = &_buffer[_currentIx];
+    ssize_t bytesRead = read(_fd, currentPos, c_bufferSize - _currentIx);
+    if (bytesRead == -1) {
+        if (errno != EWOULDBLOCK) {
+            LOG_ERROR("Call to read() on serial port failed: %s",
+                strerror(errno));
+            throw new SerialPortError();
+        }
+        return false;
+    }
+
+    for (uint16_t ix = bytesRead; ix > 0; ++_currentIx, --ix) {
+        if (_buffer[_currentIx] == '\n') {
+            if (_currentIx > 0)
+                text = std::string(_buffer, &_buffer[_currentIx - 1]);
+            else
+                text.clear();
+            if (ix > 0)
+                memcpy(/*destination*/_buffer, /*source*/&_buffer[_currentIx+1],
+                    /*count*/ix - 1);
+            _currentIx = 0;
+            return true;
+        }
+    }
+
+    if (_currentIx >= c_bufferSize) {
+        _buffer[c_bufferSize - 1] = '\0';
+        LOG_ERROR("Serial port line '%s' too long", _buffer);
+        throw new SerialPortError();
+    }
+
     return false;
 }
 
