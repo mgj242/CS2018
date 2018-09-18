@@ -2,8 +2,8 @@
 
 
 CC=g++
-CC_OPTIONS=-std=c++11 -Wall -O3
-# CC_OPTIONS=-std=c++11 -Wall -O0 -g
+CC_OPTIONS=-I src/ -std=c++11 -Wall -O3
+# CC_OPTIONS=-I src/ -std=c++11 -Wall -O0 -g
 
 
 all: bin/bridge
