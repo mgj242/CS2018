@@ -1,6 +1,7 @@
 #ifndef GARAGE_DRIVER_PROTOCOL_HPP
 #define GARAGE_DRIVER_PROTOCOL_HPP
 
+#include <string>
 
 #include "GarageDriverCommand.hpp"
 #include "GarageState.hpp"
@@ -22,6 +23,8 @@ public:
 
 private:
     SerialPort* _port;
+    void ParseCommand(std::string command);
+
 };
 
 

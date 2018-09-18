@@ -20,22 +20,49 @@ bool GarageDriverProtocol::recieveState(GarageState& state) {
     if (!_port.readLine(line))
         return false;
 */
-    // string for testing 
-    line = "abc, def,   ghi";
+ ParseCommand( "1 D5/105 B1 MS L3 l4 OK");
+   
+    return true;
+}
+
+void GarageDriverProtocol::ParseCommand(std::string command){
+
+   // string for testing 
+
 
     // parse the line and set GarageStateParameters
-    std::istringstream stream(line);
-    size_t pos=-1;
+    std::istringstream stream(command);
+
+    uint32_t ackId;
+    stream >> ackId;
+
+    char expD;
+    stream >> expD;
+    
+    char lastStripe;
+    stream >> lastStripe;
+
+    char expSlash;
+    stream >> expSlash;     
+     
+    uint32_t numOfStrips;
+    stream >> numOfStrips;    
+    
+    char expB;
+    stream >> expB;
+
+    bool blockade;
+    stream >> blockade;
+
     
 
-    while (stream>>token){
-        while ((pos=token.rfind(' ')) != std::string::npos) {
-                  std::cout << token << '\n';
-        }
-    }
-        
+    std::cout << ackId << '\n' ; 
+    std::cout << expD << '\n' ;
+    std::cout << lastStripe << '\n' ;
+    std::cout << numOfStrips << '\n' ;
+    std::cout << expB << '\n' ;
+    std::cout << blockade << '\n' ;
 
-    return true;
 }
 
 
