@@ -17,6 +17,7 @@ clean:
 bin/bridge: obj/Config.o \
             obj/GarageState.o \
             obj/GarageDriverProtocol.o \
+	    obj/WiFiAccessPointProtocol.o \
             obj/Logger.o \
             obj/main.o \
             obj/SerialPort.o
@@ -32,10 +33,13 @@ obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp src/MotorState.hpp
 obj/GarageDriverProtocol.o: src/GarageDriverProtocol.cpp src/GarageDriverProtocol.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
+obj/WiFiAccessPointProtocol.o: src/WiFiAccessPointProtocol.cpp src/WiFiAccessPointProtocol.hpp
+	$(CC) $(CC_OPTIONS) -c $< -o $@
+
 obj/Logger.o: src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-obj/main.o: src/main.cpp src/Config.hpp src/Logger.cpp src/Logger.hpp src/GarageDriverProtocol.cpp src/GarageDriverProtocol.hpp
+obj/main.o: src/main.cpp src/Config.hpp src/Logger.cpp src/Logger.hpp src/GarageDriverProtocol.cpp src/WiFiAccessPointProtocol.cpp src/GarageDriverProtocol.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
 obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp src/Logger.cpp src/Logger.hpp
