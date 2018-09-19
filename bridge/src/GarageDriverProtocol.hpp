@@ -9,7 +9,7 @@
 class GarageDriverProtocol{
 
 public:
-    void initialize(SerialPort port);
+    void initialize(SerialPort* port);
 
     /**
      * @desc Receive the state of garage driver from serial port.
@@ -21,7 +21,7 @@ public:
     void sendCommand(GarageDriverCommand command);
 
 private:
-    SerialPort _port;
+    SerialPort* _port;
 };
 
 

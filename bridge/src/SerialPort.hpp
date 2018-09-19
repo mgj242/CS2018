@@ -36,6 +36,8 @@ class SerialPort {
 public:
     // Construction & destruction
 
+    SerialPort();
+
     void initialize(const char* devicePath, uint32_t baudRate, uint8_t bitsCount,
         SerialPortStopBits stopBits, SerialPortParity parity);
 
@@ -47,10 +49,23 @@ public:
 
 
 private:
+    // Construction & destruction
+
+    SerialPort(SerialPort&); // disallow copying
+    SerialPort& operator=(SerialPort&); // disallow copying
+
+
+    // Constants
+
+    enum { c_bufferSize = 1024 };
+
+
     // Attributes
 
     int _fd;
-    
+
+    uint8_t _buffer[c_bufferSize];
+    uint16_t _currentIx;
 };
 
 
