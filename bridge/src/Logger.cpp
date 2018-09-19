@@ -1,16 +1,18 @@
+#include <cstdio>
+
 #include "Logger.hpp"
 
 
 // Construction & destruction
 
 
-static Logger* getInstance(){
+Logger* Logger::getInstance(){
     static Logger instance;
     return &instance;
 }
 
 void Logger::initialize(LogLevel logLevel) {
-	_level = logLevel;	
+    _level = logLevel;	
 }
 
 
@@ -18,12 +20,12 @@ void Logger::initialize(LogLevel logLevel) {
 
 
 void Logger::logMessage(LogLevel logLevel, const char* format, ...) {
-	if (logLevel >= _level) {
-	    va_list args;
-	    va_start(args, format);
-	    vprintf(format, args);
-	    va_end(args);
-	}
+    if (logLevel >= _level) {
+        va_list args;
+        va_start(args, format);
+        vprintf(format, args);
+        va_end(args);
+    }
 }
 
 

@@ -12,6 +12,12 @@
  */
 class GarageState {
 public:
+    // Construction & destruction
+
+GarageState(uint8_t doorStripePosition, uint8_t doorStripesCount,     MotorState motorState, 
+    bool interiorLights, bool exteriorLights);
+
+GarageState();
     // Accessors
 
     uint8_t getStripePosition() const;
@@ -20,7 +26,7 @@ public:
     void setStripesCount(uint8_t stripePosition);
 
     MotorState getMotorState() const;
-    void setMotorState(MotorState);
+    void setMotorState(MotorState motorState);
 
     bool getInteriorLights() const;
     void setInteriorLights(bool isOn);

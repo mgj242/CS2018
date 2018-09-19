@@ -1,13 +1,25 @@
 #include <iostream>
 
 #include "Config.hpp"
-
+#include "GarageState.hpp"
+#include "GarageDriverProtocol.hpp"
 
 using namespace std;
 
 
 int main() 
 {
- 	Config cfg;
+ 	
+
+    GarageState gs;
+    GarageDriverProtocol gdp; 
+
+    gdp.recieveState(gs);
+
+
+
+
+    
+    
 	return 0;
 }

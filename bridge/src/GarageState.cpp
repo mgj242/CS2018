@@ -1,6 +1,22 @@
 #include "GarageState.hpp"
 
 
+// Construction & destruction
+
+GarageState::GarageState(uint8_t doorStripePosition, uint8_t doorStripesCount,     MotorState motorState, 
+    bool interiorLights, bool exteriorLights) :
+    _doorStripePosition(doorStripePosition)
+,   _doorStripesCount(doorStripesCount)
+,   _motorState(motorState)
+,   _interiorLights(interiorLights)
+,   _exteriorLights(exteriorLights)
+{
+}
+
+GarageState::GarageState(){
+
+}
+
 // Accessors
 
 
@@ -24,7 +40,7 @@ MotorState GarageState::getMotorState() const {
     return _motorState;
 }
 
-void setMotorState(MotorState motorState) {
+void GarageState::setMotorState(MotorState motorState) {
     _motorState = motorState;
 }
 

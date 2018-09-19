@@ -5,16 +5,7 @@
 #include <cstdint>
 
 #include "Logger.hpp"
-
-
-/**
- * @desc Parity type used to configure the Linux serial port.
- */
-enum SerialPortParity{
-   Odd,
-   Even,
-   None
-};
+#include "SerialPort.hpp"
 
 
 /**
@@ -25,13 +16,13 @@ public:
     LogLevel getLoggerLevel() const;
 
     const char* getSerialPortDevicePath() const;
-    int32_t getSerialPortBaudRate() const;
-    int8_t getSerialPortDataBitsCount() const;
-    int8_t getSerialPortStopBitsCount() const; 
+    uint32_t getSerialPortBaudRate() const;
+    uint8_t getSerialPortDataBitsCount() const;
+    SerialPortStopBits getSerialPortStopBitsCount() const; 
     SerialPortParity getSerialPortParity() const;
 
     const char* getSmartHomeCentrallpAddress() const;
-    int32_t getSmartHomeCentrallPort() const;
+    uint32_t getSmartHomeCentrallPort() const;
     const char* getSmartHomeCentrallPath() const;
 
     const char* getWifiApPath() const;
