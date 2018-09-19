@@ -14,7 +14,12 @@ clean:
 	rm -f obj/*. bin/*. 
 
 
-bin/bridge: obj/Config.o obj/GarageState.o obj/main.o obj/GarageDriverProtocol.o obj/SerialPort.o
+bin/bridge: obj/Config.o \
+            obj/GarageState.o \
+            obj/GarageDriverProtocol.o \
+            obj/Logger.o \
+            obj/main.o \
+            obj/SerialPort.o
 	$(CC) -o $@ $+ 
 
 
@@ -27,11 +32,11 @@ obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp src/MotorState.hpp
 obj/GarageDriverProtocol.o: src/GarageDriverProtocol.cpp src/GarageDriverProtocol.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-obj/Loggger.o: src/Logger.cpp src/Logger.hpp
-	$(CC) $(CC_OPTIONS) -c $< -o $@
-
-obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp src/Logger.cpp src/Logger.hpp
+obj/Logger.o: src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
 obj/main.o: src/main.cpp src/Config.hpp src/Logger.cpp src/Logger.hpp src/GarageDriverProtocol.cpp src/GarageDriverProtocol.hpp
+	$(CC) $(CC_OPTIONS) -c $< -o $@
+
+obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@

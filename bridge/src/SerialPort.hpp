@@ -5,8 +5,6 @@
 #include <cstdint>
 #include <string>
 
-#include <Config.hpp>
-
 
 /**
  * @desc Exception indicating an serial port error.
@@ -44,8 +42,8 @@ public:
 
     // Interface
 
-    bool readLine(string& text);
-    bool writeLine(string text);
+    bool readLine(std::string& text);
+    bool writeLine(std::string text);
 
 
 private:
@@ -53,7 +51,7 @@ private:
 
     int _fd;
     
-}
+};
 
 
 #endif // !defined SERIAPORT_HPP

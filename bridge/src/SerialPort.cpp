@@ -3,16 +3,17 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <termios.h>
-
-#include <string.h>
 #include <unistd.h>
+
+#include <cinttypes>
+#include <string.h>
 
 #include "Logger.hpp"
 #include "SerialPort.hpp"
 
 
 void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
-    uint8_t bitsCount, uint8_t stopBits, SerialPortParity parity) {
+    uint8_t bitsCount, SerialPortStopBits stopBits, SerialPortParity parity) {
 
     // open the port
 
@@ -22,7 +23,7 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
         throw new SerialPortError();
     }
 
-    if (!fcntl(_fd, F_SETFL, FNDERLAY)) {
+    if (!fcntl(_fd, F_SETFL, FNDELAY)) {
         LOG_ERROR("Call to fcntl(F_SETFL) failed on serial port %s: %s", devicePath, strerror(errno));
         throw new SerialPortError();
     }
@@ -87,7 +88,7 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
 
     // set no flow control, and raw input and output
     options.c_iflag &= ~(IXON | IXOFF | IXANY);
-    options.c_cflag &= ~CNEW_RTSCTS;
+    options.c_cflag &= ~CRTSCTS;
     options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
     options.c_oflag &= ~OPOST;
 
@@ -104,11 +105,13 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
 // Interface
 
 
-bool SerialPort::readLine(string& text)
+bool SerialPort::readLine(std::string& text)
 {
+    return false;
 }
 
 
-bool SerialPort::writeLine(string text)
+bool SerialPort::writeLine(std::string text)
 {
+    return false;
 }
