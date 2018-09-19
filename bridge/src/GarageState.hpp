@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GARAGESTATE_H
+#define GARAGESTATE_H
 class GarageState {
 
 private:
@@ -7,3 +8,5 @@ private:
 public:
 	int getStripePosition();
 };
+
+#endif
