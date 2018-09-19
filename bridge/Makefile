@@ -18,14 +18,17 @@ bin/bridge: obj/Config.o obj/GarageState.o obj/main.o
 	$(CC) -o $@ $+ 
 
 
-obj/Config.o: src/Config.cpp src/Config.hpp
+obj/Config.o: src/Config.cpp src/Config.hpp src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp
+obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp src/MotorState.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp
+obj/Loggger.o: src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-obj/main.o: src/main.cpp src/Config.hpp
+obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp src/Logger.cpp src/Logger.hpp
+	$(CC) $(CC_OPTIONS) -c $< -o $@
+
+obj/main.o: src/main.cpp src/Config.hpp src/Logger.cpp src/Logger.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@

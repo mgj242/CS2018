@@ -1,48 +1,30 @@
-#include "SerialPort.hpp"
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <fcnt1.h>
 #include <termios.h>
-#include <unistd.h>
 
 #include <string.h>
+#include <unistd.h>
 
-
-/*
-bool ReadLine(string &str){
-    FILE * file;
-    file = fopen(,);
-    if(file == NULL) return false;
-
-    else return true;
-}
-*/
-
-/*
-bool WriteLine(string str){
-    FILE * file;
-    file = fopen(str,)
-}*/
-
-class Error {};
+#include "Logger.hpp"
+#include "SerialPort.hpp"
 
 
 void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
-    uint8_t bitsCount, uint8_t stopBits, SerialPortParity parity ) {
+    uint8_t bitsCount, uint8_t stopBits, SerialPortParity parity) {
 
     // open the port
 
     _fd = open(devicePath, O_RDWR | O_NOCTTY | O_NDELAY);
     if (_fd == -1) {
         LOG_ERROR("Unable to oprm derial port %s: %s", devicePath, strerror(errno));
-        throw new Error();
+        throw new SerialPortError();
     }
 
     if (!fcntl(_fd, F_SETFL, FNDERLAY)) {
         LOG_ERROR("Call to fcntl(F_SETFL) failed on serial port %s: %s", devicePath, strerror(errno));
-        throw new Error();
+        throw new SerialPortError();
     }
 
     // set serial port settings
@@ -82,7 +64,4 @@ void SerialPort::initialize(const char* devicePath, uint32_t baudRate,
         throw new Error();
     }
     options.c_cflag |= dataBits;
-}
-
-
 }

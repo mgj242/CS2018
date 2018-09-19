@@ -1,9 +1,9 @@
-#ifndef GARAGECOMMAN_HPP
+#ifndef GARAGECOMMAND_HPP
 #define GARAGECOMMAND_HPP
 
 
 /**
- *@desc Enum representation of garage commands.
+ *@desc Garage controller commands.
  */
 enum GarageDriverProtocol {
 	NoOperation,
@@ -18,4 +18,4 @@ enum GarageDriverProtocol {
 };
 
 
-#endif
+#endif // !defined GARAGECOMMAND_HPP
