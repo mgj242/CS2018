@@ -1,6 +1,8 @@
 #include "Config.hpp"
 
-
+/**
+@desc This header contains functions returns configuration constants.
+*/
 
 const char* Config::getSerialPortDevicePath() const {
     return "/dev/ttyAMA0";
