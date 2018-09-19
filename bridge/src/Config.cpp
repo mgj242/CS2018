@@ -1,8 +1,5 @@
 #include "Config.hpp"
 
-/**
-@desc This header contains functions returns configuration constants.
-*/
 
 const char* Config::getSerialPortDevicePath() const {
     return "/dev/ttyAMA0";
@@ -10,34 +7,33 @@ const char* Config::getSerialPortDevicePath() const {
 
 
 int32_t Config::getSerialPortBaudRate() const {
-
-	return 9600; 
+    return 9600; 
 }
 
 SerialPortParity Config::getSerialPortParity() const{
-   return Odd;
+    return Odd;
 }
 
 int8_t Config::getSerialPortDataBitsCount() const {
-	return 8;
+    return 8;
 }
 
 int8_t Config::getSerialPortStopBitsCount() const 
 {
-	return 1;
+    return 1;
 }
 
 const char* Config::getSmartHomeCentrallpAddress() const {
-	return "address";
+    return "address";
 }
 
 int32_t Config::getSmartHomeCentrallPort() const{
-	return 3000;
+    return 3000;
 }
 const char* Config::getSmartHomeCentrallPath() const{
-	return "path";
+    return "path";
 }
 
 const char* Config::getWifiApPath() const{
-	return "Wifi_path";
+    return "Wifi_path";
 }

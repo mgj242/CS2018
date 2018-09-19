@@ -3,6 +3,11 @@
 
 
 #include <cstdint>
+
+/**
+@desc This header contains functions returning configuration constants.
+*/
+
 enum SerialPortParity{
    Odd,
    Even,
