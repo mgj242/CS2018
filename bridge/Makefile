@@ -2,8 +2,9 @@
 
 
 CC=g++
-CC_OPTIONS=-I src/ -std=c++11 -Wall -O3
-# CC_OPTIONS=-I src/ -std=c++11 -Wall -O0 -g
+CC_COMMON_OPTIONS=-I src/ -std=c++11 -Wall
+CC_OPTIONS=$(CC_COMMON_OPTIONS) -O3
+# CC_OPTIONS=-$(CC_COMMON_OPTIONS) -O0 -g
 
 
 all: bin/bridge
@@ -20,6 +21,8 @@ bin/bridge: obj/Config.o obj/GarageState.o
 obj/Config.o: src/Config.cpp src/Config.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
-
 obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp
+	$(CC) $(CC_OPTIONS) -c $< -o $@
+
+obj/main.o: src/main.cpp src/Config.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
