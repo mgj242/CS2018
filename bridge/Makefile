@@ -21,6 +21,9 @@ bin/bridge: obj/Config.o obj/GarageState.o obj/main.o
 obj/Config.o: src/Config.cpp src/Config.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
+obj/SerialPort.o: src/SerialPort.cpp src/SerialPort.hpp
+	$(CC) $(CC_OPTIONS) -c $< -o $@
+
 obj/GarageState.o: src/GarageState.cpp src/GarageState.hpp
 	$(CC) $(CC_OPTIONS) -c $< -o $@
 
