@@ -9,7 +9,7 @@ const char* Config::getSerialPortDevicePath() const {
     return "/dev/ttyAMA0";
 }
 
-int32_t Config::getSerialPortBaudRate() const {
+uint32_t Config::getSerialPortBaudRate() const {
     return 9600; 
 }
 
@@ -17,19 +17,19 @@ SerialPortParity Config::getSerialPortParity() const{
     return Odd;
 }
 
-int8_t Config::getSerialPortDataBitsCount() const {
+uint8_t Config::getSerialPortDataBitsCount() const {
     return 8;
 }
 
-int8_t Config::getSerialPortStopBitsCount() const {
-    return 1;
+SerialPortStopBits Config::getSerialPortStopBitsCount() const {
+    return One;
 }
 
 const char* Config::getSmartHomeCentrallpAddress() const {
     return "address";
 }
 
-int32_t Config::getSmartHomeCentrallPort() const {
+uint32_t Config::getSmartHomeCentrallPort() const {
     return 3000;
 }
 const char* Config::getSmartHomeCentrallPath() const {
