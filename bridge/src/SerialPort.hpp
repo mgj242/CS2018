@@ -4,16 +4,17 @@
 
 #include <Config.hpp>
 #include <cstdint>
-#include <string>
 
 class SerialPort{
 
 public:
 
-    void initialize(const char* SerialPortDevicePath, int32_t BaudRate, int8_t BitsCount, int8_t StopBits, SerialPortParity parity ) const;
+    void initialize(const char* devicePath, int32_t baudRate, int8_t bitsCount, int8_t stopBits, SerialPortParity parity ) ;
 
-    bool ReadLine(string str);
-    bool WriteLine(string str);
 }
+
+
+
+
 
 #endif
