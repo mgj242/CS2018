@@ -14,7 +14,7 @@ clean:
 	rm -f obj/*. bin/*. 
 
 
-bin/bridge: obj/Config.o obj/GarageState.o
+bin/bridge: obj/Config.o obj/GarageState.o obj/main.o
 	$(CC) -o $@ $+ 
 
 
