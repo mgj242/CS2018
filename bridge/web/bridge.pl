@@ -7,7 +7,7 @@ use warnings;
 
 BEGIN { unshift @INC, '.'; }
 
-use CGI;
+use CGI qw(meta);
 use Readonly;
 
 use API;
@@ -71,15 +71,20 @@ my $query = CGI->new;
 
 # check for authorization
 
+my $authCookie;
+
 $_ = 0 for my ($authorized, $authorizationFailed);
-if (my $authCookie = $query->cookie('auth')) {
-    my ($name, $pass) = $authCookie->value() =~ /^(.+?);(.+)$/;
-    $authorized = exists $AUTH{$name} && $AUTH{$name} eq $pass;
+if ($authCookie = $query->cookie('auth')) {
+    my ($name, $pass) = $authCookie->value();
+    $authorized = defined $name && defined $pass && exists $AUTH{$name} && $AUTH{$name} eq $pass;
 }
 
-if (!$authorized && (defined (my $name = $query->param('name')) || defined (my $pass = $query->param('pass')))) {
-    $authorized = exists $AUTH{$name} && $AUTH{$name} eq $pass;
+if (!$authorized) {
+    my $name = $query->param('name');
+    my $pass = $query->param('pass');
+    $authorized = defined $name && defined $pass && exists $AUTH{$name} && $AUTH{$name} eq $pass;
     $authorizationFailed = !$authorized;
+    $authCookie = $query->cookie({ -name => 'auth', -value => [ $name, $pass ] }) if $authorized;
 }
 
 
@@ -104,10 +109,12 @@ my %htmlTagAttrs = (
         -title => 'Smart Home Garage Control Point',
         -style => { -code => $css }, -script => $script
     );
-$htmlTagAttrs{-head} = meta({-http_equiv => 'refresh', -content => $REFRESH_INTERVAL})
-    if $authorized;
+if ($authorized) {
+    $htmlTagAttrs{-head} = meta({-http_equiv => 'refresh', -content => $REFRESH_INTERVAL});
+    $query->delete('close', 'open');
+}
 
-print $query->header('text/html').
+print $query->header({ -type => 'text/html', -cookie => $authCookie }).
     $query->start_html(\%htmlTagAttrs).
     $query->start_center().
         $query->h1('Smart Home<br/>Garage').
@@ -180,7 +187,7 @@ if (@errors) {
         print
             $query->start_div().
                 $query->start_fieldset({ class => 'fieldset-auto-width error' }).$query->legend('Errors');
-        print       $query->p($_) for @errors;
+        print       $query->p($_).$query->br() for @errors;
         print   $query->end_fieldset().
             $query->end_div();
 }
@@ -188,7 +195,6 @@ if (@errors) {
 
 # closing HTML tags
 
-print
-        $query->end_form().
+print   $query->end_form().
     $query->end_center().
     $query->end_html();

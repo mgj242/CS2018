@@ -71,50 +71,50 @@ sub sendCommand {
 sub isExteriorLightsOn {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{'exterior lights'} eq 'on';
+    return defined $this->{status}->{'exterior lights'} && $this->{status}->{'exterior lights'} eq 'on';
 }
 
 sub isInteriorLightsOn {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{'interior lights'} eq 'on';
+    return defined $this->{status}->{'interior lights'} && $this->{status}->{'interior lights'} eq 'on';
 }
 
 
 sub getDoorStatus {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door};
+    return defined $this->{status}->{door} && $this->{status}->{door};
 }
 
 sub isBlocked {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door} eq 'blocked';
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'blocked';
 }
 
 sub isClosed {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door} eq 'closed';
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'closed';
 }
 
 sub isClosing {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door} eq 'closing';
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'closing';
 }
 
 sub isOpened {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door} eq 'opened';
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'opened';
 }
 
 sub isOpening {
     my ($this) = @_;
     $this->_readStatus();
-    return $this->{status}->{door} eq 'opening';
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'opening';
 }
 
 
