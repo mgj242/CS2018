@@ -1,43 +1,58 @@
-<!DOCTYPE html>
-<html>
-<body>
-  
-<center>
-<h2>Smart Home Postman Controller</h2>
-  <img src="fptLogo.png" />
+Content-Type: text/html; charset=ISO-8859-1
 
-<p>Authorization for opening garage gate</p>
-  
-<form action="/action_page.php">
-  <fieldset>
-   <legend>Personal information:</legend>
-	<br />
-    <b>ID:
-	</b>
-	<br />
-    <input name="firstname" type="text" value="YourID" /> 
-    <br />
-	<br />
-    <b>Password:</b>
-	<br /> 
-    <input name="password" type="password" value="password" />
-    <br />
-	<br />
-	<br />
-    <input id = "openGate" onClick="closing()" type="submit" value="Open gate" />
-    <input type="submit" value="Close gate" />
-  </fieldset>
-  </form>
-  
-</center>
-  
-  <script>
-  function closing() {
-		document.getElementById("openGate").value = "Close GATE" 
-  }
-  </script>
-  
-  
-  
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Smart Home Garage Control Point</title>
+<style type="text/css">
+<!--/* <![CDATA[ */
+<!--
+    .fieldset-auto-width {
+        display: inline-block;
+        width: 140px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .ck-button {
+        margin: 4px;
+        background-color: #E4E4E4;
+        border-radius: 4px;
+        border: 1px solid #D0D0D0;
+        overflow: auto;
+    }
+    .ck-button label {
+        width: 4.0em;
+    }
+    .ck-button label span {
+        text-align: center;
+        padding: 3px 0px;
+        display: block;
+    }
+    .ck-button label input {
+        position: absolute;
+        top: -20px;
+    }
+
+    .ck-button input:checked + span {
+        background-color: #66B2FF;
+        color: #FFFFFF;
+    }
+-->
+
+
+/* ]]> */-->
+</style>
+<script type="text/javascript">//<![CDATA[
+
+//]]></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body>
+<center><h1>Smart Home<br/>Garage</h1><img src="fptLogo.png" width="155px" /><br /><br /><form method="post" action="bridge.pl" enctype="multipart/form-data"><div><fieldset class="fieldset-auto-width"><legend>Authorization</legend><br /><b>Name:</b><br /><input type="text" name="name"  size="15" /><br /><br /><b>Password:</b><br /><input type="password" name="password"  size="15" /></fieldset></div><div><fieldset class="fieldset-auto-width"><legend>Operations</legend><br /><div class="ck-button"><label><input name="interior" type="checkbox" value="on" /><span>Interior lights</span></label></div><div class="ck-button"><label><input name="exterior" type="checkbox" value="off" /><span>Exterior lights</span></label></div><br /><input type="submit" name="open" value="Open door" /></fieldset></div><div><fieldset class="fieldset-auto-width"><legend>Status</legend><p>The door is closing.</p></fieldset></div></form></center>
 </body>
-</html> 
+</html>
