@@ -2,18 +2,38 @@
 #define SERIALPORT_HPP
 
 
-#include <Config.hpp>
 #include <cstdint>
 #include <string>
 
-class SerialPort{
+#include <Config.hpp>
 
+
+/**
+ * @desc Exception indicating an serial port error.
+ */
+class SerialPortError {
+};
+
+
+class SerialPort {
 public:
+    // Construction & destruction
 
-    void initialize(const char* SerialPortDevicePath, int32_t BaudRate, int8_t BitsCount, int8_t StopBits, SerialPortParity parity ) const;
+    void initialize(const char* devicePath, uint32_t baudRate, uint8_t bitsCount,
+        uint8_t stopBits, SerialPortParity parity);
 
-    bool ReadLine(string str);
-    bool WriteLine(string str);
+
+    // Interface
+
+    bool readLine(string& text);
+    bool writeLine(string text);
+
+
+private:
+    // Attributes
+
+    int _fd;
 }
 
-#endif
+
+#endif // !defined SERIAPORT_HPP

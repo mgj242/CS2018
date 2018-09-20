@@ -1,10 +1,13 @@
 #include "Config.hpp"
 
 
+LogLevel Config::getLoggerLevel() const {
+    return Debug;
+}
+
 const char* Config::getSerialPortDevicePath() const {
     return "/dev/ttyAMA0";
 }
-
 
 int32_t Config::getSerialPortBaudRate() const {
     return 9600; 
@@ -18,8 +21,7 @@ int8_t Config::getSerialPortDataBitsCount() const {
     return 8;
 }
 
-int8_t Config::getSerialPortStopBitsCount() const 
-{
+int8_t Config::getSerialPortStopBitsCount() const {
     return 1;
 }
 
@@ -27,13 +29,13 @@ const char* Config::getSmartHomeCentrallpAddress() const {
     return "address";
 }
 
-int32_t Config::getSmartHomeCentrallPort() const{
+int32_t Config::getSmartHomeCentrallPort() const {
     return 3000;
 }
-const char* Config::getSmartHomeCentrallPath() const{
+const char* Config::getSmartHomeCentrallPath() const {
     return "path";
 }
 
-const char* Config::getWifiApPath() const{
+const char* Config::getWifiApPath() const {
     return "Wifi_path";
 }

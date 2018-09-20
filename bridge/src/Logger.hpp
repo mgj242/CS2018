@@ -1,31 +1,52 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
+
 
 #include <cstdarg>
 
+
 enum LogLevel {
-Debug = 1,
-Info = 2,
-Warning = 3,
-Error = 4
+    Debug = 1,
+    Info = 2,
+    Warning = 3,
+    Error = 4
 };
+
 
 class Logger {
-
 public:
+    // Construction & destruction
+
+    void initialize(LogLevel logLevel);
 
     static Logger* getInstance();
-    void initialize(LogLevel logLevel);
-    void logDebug(const char* message);
-    void logInfo(const char* message);
-    void logWarning(const char* message);
-    void logError(const char* message);
+
+
+    // Interface
+
+
+    void logMessage(LogLevel logLevel, const char* message, ...);
+
+    // Accessors
+
     void setLogLevelFilter(LogLevel logLevel);
 
-private:
-    void logMessage(LogLevel logLevel, const char* message, ...);
-    LogLevel _level;
 
+private:
+    // Attributes
+
+    LogLevel _level;
 };
 
-#endif
+
+#define LOG_DEBUG(format, ...) \
+    Logger::getInstance()->logMessage(Debug, "DEBUG: " format, __VA_ARGS__);
+#define LOG_INFO(format, ...) \
+    Logger::getInstance()->logMessage(Info, "INFO: " format, __VA_ARGS__);
+#define LOG_WARNING(format, ...) \
+    Logger::getInstance()->logMessage(Warning, "WARNING: " format, __VA_ARGS__);
+#define LOG_ERROR(format, ...) \
+    Logger::getInstance()->logMessage(Error, "ERROR: " format, __VA_ARGS__);
+
+
+#endif // !defined LOGGER_HPP

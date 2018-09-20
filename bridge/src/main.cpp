@@ -1,11 +1,13 @@
-#include "Config.hpp"
 #include <iostream>
+
+#include "Config.hpp"
+
+
 using namespace std;
+
 
 int main() 
 {
  	Config cfg;
-	const char* c = cfg.getSerialPortDevicePath();
-	cout <<"This is path" <<c << endl;   
 	return 0;
 }
