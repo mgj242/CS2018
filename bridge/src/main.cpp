@@ -11,11 +11,7 @@ int main()
 {
  	
 
-    GarageState gs;
-    GarageDriverProtocol gdp; 
-
-    gdp.recieveState(gs);
-
+    
 
 
 

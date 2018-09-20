@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 
+
 #include "GarageDriverProtocol.hpp"
 
 
@@ -20,12 +21,12 @@ bool GarageDriverProtocol::recieveState(GarageState& state) {
     if (!_port.readLine(line))
         return false;
 */
- ParseCommand( "1 D5/105 B1 MS L3 l4 OK");
+ ParseCommand( "1 D5/1 B1 MS L3 l4 OK sdf");
    
     return true;
 }
 
-void GarageDriverProtocol::ParseCommand(std::string command){
+void GarageDriverProtocol::ParseCommand(const std::string& command){
 
    // string for testing 
 
@@ -33,8 +34,7 @@ void GarageDriverProtocol::ParseCommand(std::string command){
     // parse the line and set GarageStateParameters
     std::istringstream stream(command);
 
-    uint32_t ackId;
-    stream >> ackId;
+    uint32_t ackId = parseItem<uint32_t>(stream);
 
     char expD;
     stream >> expD;
@@ -54,15 +54,55 @@ void GarageDriverProtocol::ParseCommand(std::string command){
     bool blockade;
     stream >> blockade;
 
+    char expM;
+    stream >> expM;
     
+    char motorState;
+    stream >> motorState;
+    
+    char expL;
+    stream >> expL;
+    
+    bool extLights = parseItem<bool>(stream);
 
-    std::cout << ackId << '\n' ; 
-    std::cout << expD << '\n' ;
-    std::cout << lastStripe << '\n' ;
-    std::cout << numOfStrips << '\n' ;
-    std::cout << expB << '\n' ;
-    std::cout << blockade << '\n' ;
+    char expl;
+    stream >> expl;
 
+    bool intLights;
+    stream >> intLights;
+    
+    std::string message;
+    std::getline(stream, message);
+
+
+    /*
+    std::string message;
+    stream >> message;
+    */
+
+    std::cout << ackId << '\n'; 
+    std::cout << expD << '\n';
+    std::cout << lastStripe << '\n';
+    std::cout << expSlash << '\n';
+    std::cout << numOfStrips << '\n';
+    std::cout << expB << '\n';
+    std::cout << blockade << '\n';
+    std::cout << expM << '\n';
+    std::cout << motorState << '\n';
+    std::cout << message << '\n';
+
+
+
+}
+
+template<typename Type>
+Type GarageDriverProtocol::parseItem(std::istringstream& stream) {
+    Type result;
+    stream >> result;
+    if (!stream.good()) {
+        throw new GarageDriverProtocolError();
+    }
+    return result;
 }
 
 

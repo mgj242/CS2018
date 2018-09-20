@@ -7,6 +7,9 @@
 #include "GarageState.hpp"
 #include "SerialPort.hpp"
 
+
+class GarageDriverProtocolError {};
+
 class GarageDriverProtocol{
 
 public:
@@ -23,8 +26,10 @@ public:
 
 private:
     SerialPort* _port;
-    void ParseCommand(std::string command);
+    void ParseCommand(const std::string& command);
 
+    template<typename Type>
+    Type parseItem(std::istringstream&);
 };
 
 
