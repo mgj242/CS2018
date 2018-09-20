@@ -12,7 +12,7 @@ void GarageDriverProtocol::initialize(SerialPort* port) {
 }
 
 
-bool GarageDriverProtocol::recieveState(GarageState& state) {
+bool GarageDriverProtocol::receiveState(GarageState& state) {
     // read line from serial port
     std::string line;
     std::string token;

@@ -7,17 +7,31 @@
 #include "Logger.hpp"
 
 
-class WiFiAccessPointProtocol {
 
+class WiFiAccessPointProtocolError { };
+
+
+class WiFiAccessPointProtocol {
 public:
-    void initialize(const char* path);
+    WiFiAccessPointProtocol();
+
+    void initialize(const char* commandFilePath,const char* commandLockFilePath,
+        const char* statusFilePath, const char* statusLockFilePath );
 
     void updateState(GarageState state);
 
     bool receiveCommand(GarageDriverCommand& command);
 
 private:
-    const char* _path;
+    const char* _commandFilePath;
+    const char* _commandLockFilePath;
+    const char* _statusFilePath;
+    const char* _statusLockFilePath;
+
+    bool _haveExteriorLightsCommand;
+    bool _switchExteriorLightsOn;
+    bool _haveInteriorLightsCommand;
+    bool _switchInteriorLightsOn;
 };
 
 

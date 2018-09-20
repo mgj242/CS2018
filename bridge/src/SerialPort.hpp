@@ -45,7 +45,8 @@ public:
     // Interface
 
     bool readLine(std::string& text);
-    bool writeLine(std::string text);
+    bool writeLine(std::string& text);
+    void pump();
 
 
 private:
@@ -64,8 +65,10 @@ private:
 
     int _fd;
 
-    uint8_t _buffer[c_bufferSize];
-    uint16_t _currentIx;
+    uint8_t _inputBuffer[c_bufferSize];
+    uint8_t _outputBuffer[c_bufferSize];
+    uint16_t _inputIx;
+    uint16_t _outputIx;
 };
 
 

@@ -25,7 +25,10 @@ public:
     uint32_t getSmartHomeCentrallPort() const;
     const char* getSmartHomeCentrallPath() const;
 
-    const char* getWifiApPath() const;
+    const char* getWifiApCommandFilePath() const;
+    const char* getWifiApCommandLockFilePath() const;
+    const char* getWifiApStatusFilePath() const;
+    const char* getWifiApStatusLockFilePath() const;
 };
 
 

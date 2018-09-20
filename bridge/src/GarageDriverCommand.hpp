@@ -6,15 +6,14 @@
  *@desc Garage controller commands.
  */
 enum GarageDriverCommand{
-	NoOperation,
-	OpenToNextStrip,
-	FullOpen,
-	FullClose,
-	CloseToNextStrip,
-	SwitchInteriorsLightsOn,
-	SwitchInteriorLightsOff,
-	SwitchExteriorLightsOn,
-	SwitchExteriorLightsOff
+    OpenToNextStrip,
+    FullOpen,
+    FullClose,
+    CloseToNextStrip,
+    SwitchInteriorLightsOn,
+    SwitchInteriorLightsOff,
+    SwitchExteriorLightsOn,
+    SwitchExteriorLightsOff
 };
 
 

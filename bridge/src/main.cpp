@@ -35,7 +35,10 @@ int main()
     gdp.initialize(&sp);
 
     WiFiAccessPointProtocol wapp;
-    wapp.initialize(cfg.getWifiApPath());
+    wapp.initialize(cfg.getWifiApStatusFilePath(),
+        cfg.getWifiApStatusLockFilePath(),
+        cfg.getWifiApCommandFilePath(),
+        cfg.getWifiApCommandLockFilePath());
 
     while (1) {
         GarageState state;

@@ -36,6 +36,18 @@ const char* Config::getSmartHomeCentrallPath() const {
     return "path";
 }
 
-const char* Config::getWifiApPath() const {
-    return "Wifi_path";
+const char* Config::getWifiApCommandFilePath() const {
+    return "command.txt";
+}
+
+const char* Config::getWifiApCommandLockFilePath() const {
+    return "command.lock";
+}
+
+const char* Config::getWifiApStatusFilePath() const {
+    return "status.txt";
+}
+
+const char* Config::getWifiApStatusLockFilePath() const {
+    return "status.lock";
 }

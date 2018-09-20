@@ -14,10 +14,11 @@ class GarageState {
 public:
     // Construction & destruction
 
-GarageState(uint8_t doorStripePosition, uint8_t doorStripesCount,     MotorState motorState, 
-    bool interiorLights, bool exteriorLights);
+    GarageState(uint8_t doorStripePosition, uint8_t doorStripesCount,     MotorState motorState, 
+        bool interiorLights, bool exteriorLights);
 
-GarageState();
+    GarageState();
+
     // Accessors
 
     uint8_t getStripePosition() const;

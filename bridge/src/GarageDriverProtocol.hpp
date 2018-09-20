@@ -20,7 +20,7 @@ public:
      * @param state received garage state
      * @return true iff the state is available
      */
-    bool recieveState(GarageState& state);
+    bool receiveState(GarageState& state);
 
     void sendCommand(GarageDriverCommand command);
 
