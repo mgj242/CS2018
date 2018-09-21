@@ -1,7 +1,9 @@
-#ifndef GARAGE_DRIVER_PROTOCOL_HPP
-#define GARAGE_DRIVER_PROTOCOL_HPP
+#ifndef GARAGEDRIVERPROTOCOL_HPP
+#define GARAGEDRIVERPROTOCOL_HPP
+
 
 #include <string>
+
 
 #include "GarageDriverCommand.hpp"
 #include "GarageState.hpp"
@@ -10,8 +12,8 @@
 
 class GarageDriverProtocolError {};
 
-class GarageDriverProtocol{
 
+class GarageDriverProtocol {
 public:
     void initialize(SerialPort* port);
 
@@ -25,12 +27,17 @@ public:
     void sendCommand(GarageDriverCommand command);
 
 private:
-    SerialPort* _port;
-    void ParseCommand(const std::string& command);
+    // Implementation
+
+    void discardChar(std::istringstream&, char, const std::string& line);
 
     template<typename Type>
-    Type parseItem(std::istringstream&);
+    Type parseItem(std::istringstream&, const std::string& line);
+
+    // Attributes
+
+    SerialPort* _port;
 };
 
 
-#endif // !defined GARAGE_DRIVER_PROTOCOL_HPP
+#endif // !defined GARAGEDRIVERPROTOCOL_HPP
