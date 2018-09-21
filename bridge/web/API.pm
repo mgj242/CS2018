@@ -5,7 +5,7 @@ package API;
 SmartHome WiFi Bridge garage door API.
 
 The status file should have the following format:
-    door: opened | closed | opening | closing | blocked
+    door: opened | closed | opening | closing | blocked | partial
     interior lights: on | off
     exterior lights: on | off
 
@@ -115,6 +115,12 @@ sub isOpening {
     my ($this) = @_;
     $this->_readStatus();
     return defined $this->{status}->{door} && $this->{status}->{door} eq 'opening';
+}
+
+sub isStoppedInTheMiddle {
+    my ($this) = @_;
+    $this->_readStatus();
+    return defined $this->{status}->{door} && $this->{status}->{door} eq 'partial';
 }
 
 

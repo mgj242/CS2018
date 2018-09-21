@@ -83,7 +83,7 @@ if (!$authorized) {
     my $name = $query->param('name');
     my $pass = $query->param('pass');
     $authorized = defined $name && defined $pass && exists $AUTH{$name} && $AUTH{$name} eq $pass;
-    $authorizationFailed = !$authorized;
+    $authorizationFailed = (defined $name || defined $pass) & !$authorized;
     $authCookie = $query->cookie({ -name => 'auth', -value => [ $name, $pass ] }) if $authorized;
 }
 
@@ -172,9 +172,13 @@ eval {
     if ($api->isClosing() || $api->isOpening() || $api->isBlocked()) {
         print
             $query->start_div().
-                $query->start_fieldset({ class => 'fieldset-auto-width' }).$query->legend('Status').
-                    $query->p('The door is '.$api->getDoorStatus().'.').
-                $query->end_fieldset().
+                $query->start_fieldset({ class => 'fieldset-auto-width' }).$query->legend('Status');
+        if ($api->isStoppedInTheMiddle()) {
+            print   $query->p('The door is partially opened with the motor stopped.');
+        } else {
+            print   $query->p('The door is '.$api->getDoorStatus().'.');
+        }
+        print   $query->end_fieldset().
             $query->end_div();
     }
 };
